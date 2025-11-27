@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <oatconfig>
+        <licensefile>LICENSE.md</licensefile>
+        <policylist>
+            <policy name="projectPolicy" desc="">
+                <policyitem type="compatibility" name="libtiff" path=".*" desc="Default"/>
+                <policyitem type="compatibility" name="MIT" path=".*" desc="MIT"/>
+                <policyitem type="compatibility" name="BSD-3-Clause" path=".*" desc="BSD"/>
+                <policyitem type="compatibility" name="AllPermissive" path=".*" desc="Permissive"/>
+                <policyitem type="compatibility" name="InvalidLicense" path=".*" desc="Allow Misc"/>
+                <policyitem type="license" name="libtiff" path=".*" desc="Allow libtiff header globally"/>    
+                <policyitem type="copyright" name="Sam Leffler" path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Silicon Graphics" path=".*" desc="Exact Match License File"/>
+            </policy>
+        </policylist>
+        <filefilterlist>
+            <filefilter name="defaultFilter" desc="Files not to check">
+                <filteritem type="filepath" name="libtiff/.*" desc="Skip core source headers"/>
+                <filteritem type="filepath" name="tools/.*" desc="Skip tools headers"/>
+                <filteritem type="filepath" name="contrib/.*" desc="Skip contrib headers"/>
+                <filteritem type="filepath" name="port/.*" desc="Skip port headers"/>
+                <filteritem type="filepath" name="doc/.*" desc="Skip docs"/>
+                <filteritem type="filepath" name="test/.*" desc="Skip tests"/>
+                <filteritem type="filepath" name="build/.*" desc="Skip build"/>
+                <filteritem type="filepath" name="cmake/.*" desc="Skip cmake"/>
+                <filteritem type="filepath" name="m4/.*" desc="Skip macros"/>
+                <filteritem type="filepath" name="archive/.*" desc="Skip archive"/>
+                <filteritem type="filepath" name="contrib/win_dib/.*" desc="Skip win"/>
+                <filteritem type="filename" name="README.md" desc="Readme"/>
+                <filteritem type="filename" name="README.OpenSource" desc="Readme"/>
+                <filteritem type="filename" name="README" desc="Readme"/>
+                <filteritem type="filename" name="ChangeLog" desc="Log"/>
+                <filteritem type="filename" name="COMMITTERS" desc="Meta"/>
+                <filteritem type="filename" name="TODO" desc="Meta"/>
+                <filteritem type="filename" name="VERSION" desc="Meta"/>
+                <filteritem type="filename" name="RELEASE-DATE" desc="Meta"/>
+                <filteritem type="filename" name="autogen.sh" desc="Script"/>
+                <filteritem type="filename" name="configure.ac" desc="Config"/>
+                <filteritem type="filename" name="Makefile.am" desc="Make"/>
+                <filteritem type="filename" name="tiff.spec" desc="Spec"/>
+                <filteritem type="filename" name="placeholder.h" desc="Header"/>
+                <filteritem type="filename" name=".git-blame-ignore-revs" desc="Git"/>
+                <filteritem type="filename" name=".pre-commit-config.yaml" desc="Config"/>
+                <filteritem type="filepath" name=".*HOWTO-.*" desc="Docs"/>
+            </filefilter>
+            <filefilter name="binaryFilter" desc="Binary files check filter">
+                <filteritem type="filepath" name="doc/.*" desc="Docs"/>
+                <filteritem type="filepath" name="test/.*" desc="Tests"/>
+                <filteritem type="filepath" name="archive/.*" desc="Archive"/>
+                <filteritem type="filepath" name="contrib/.*" desc="Contrib"/>
+                <filteritem type="filepath" name=".*\.gif" desc="Img"/>
+                <filteritem type="filepath" name=".*\.jpg" desc="Img"/>
+                <filteritem type="filepath" name=".*\.png" desc="Img"/>
+                <filteritem type="filepath" name=".*\.tif" desc="Img"/>
+                <filteritem type="filepath" name=".*\.tiff" desc="Img"/>
+                <filteritem type="filepath" name=".*\.iptc" desc="Data"/>
+                <filteritem type="filename" name="test.iptc" desc="Data"/>
+            </filefilter>
+        </filefilterlist>
+    </oatconfig>
+</configuration>

@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "libtiff",
+        "License": "libtiff",
+        "License File": "LICENSE.md",
+        "Version Number": "v4.7.0",
+        "Owner": "pengyonglong2@h-partners.com",
+        "Upstream URL": "https://gitlab.com/libtiff/libtiff",
+        "Description": "A library for reading and writing Tagged Image File Format (TIFF) files."
+    }
+]
