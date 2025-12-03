@@ -1,0 +1,213 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+declare_args() {
+    enable_lzw = true
+    enable_packbits = true
+    enable_thunder = true
+    enable_next = true
+    enable_jpeg = true
+    enable_ojpeg = true
+    enable_ccitt = true
+    enable_jbig = false
+    enable_zip = true
+    enable_pixarlog = true
+    enable_logluv = true
+    enable_lerc = false
+    enable_lzma = false
+    enable_zstd = false
+    enable_webp = false
+}
+
+src_path = "//third_party/libtiff"
+out_dir = root_out_dir + "/third_party_libtiff"
+code_dir = out_dir
+
+base_libtiff_source = [
+    "libtiff/tif_aux.c",
+    "libtiff/tif_close.c",
+    "libtiff/tif_codec.c",
+    "libtiff/tif_color.c",
+    "libtiff/tif_compress.c",
+    "libtiff/tif_dir.c",
+    "libtiff/tif_dirinfo.c",
+    "libtiff/tif_dirread.c",
+    "libtiff/tif_dirwrite.c",
+    "libtiff/tif_dumpmode.c",
+    "libtiff/tif_error.c",
+    "libtiff/tif_extension.c",
+    "libtiff/tif_flush.c",
+    "libtiff/tif_getimage.c",
+    "libtiff/tif_hash_set.c",
+    "libtiff/tif_open.c",
+    "libtiff/tif_predict.c",
+    "libtiff/tif_print.c",
+    "libtiff/tif_read.c",
+    "libtiff/tif_strip.c",
+    "libtiff/tif_swab.c",
+    "libtiff/tif_tile.c",
+    "libtiff/tif_unix.c",
+    "libtiff/tif_version.c",
+    "libtiff/tif_warning.c",
+    "libtiff/tif_write.c",
+    "libtiff/tif_jpeg_12.c",
+]
+
+all_libtiff_sources = base_libtiff_source
+
+if (enable_lzw) {
+    all_libtiff_sources += [ "libtiff/tif_lzw.c" ]
+}
+if (enable_packbits) {
+    all_libtiff_sources += [ "libtiff/tif_packbits.c" ]
+}
+if (enable_thunder) {
+    all_libtiff_sources += [ "libtiff/tif_thunder.c" ]
+}
+if (enable_next) {
+    all_libtiff_sources += [ "libtiff/tif_next.c" ]
+}
+if (enable_jpeg) {
+    all_libtiff_sources += [ "libtiff/tif_jpeg.c" ]
+}
+if (enable_ojpeg) {
+    all_libtiff_sources += [ "libtiff/tif_ojpeg.c" ]
+}
+if (enable_ccitt) {
+    all_libtiff_sources += [ "libtiff/tif_fax3.c", "libtiff/tif_fax3sm.c" ]
+}
+if (enable_jbig) {
+    all_libtiff_sources += [ "libtiff/tif_jbig.c" ]
+}
+if (enable_zip) {
+    all_libtiff_sources += [ "libtiff/tif_zip.c" ]
+}
+if (enable_pixarlog) {
+    all_libtiff_sources += [ "libtiff/tif_pixarlog.c" ]
+}
+if (enable_logluv) {
+    all_libtiff_sources += [ "libtiff/tif_luv.c" ]
+}
+if (enable_lerc) {
+    all_libtiff_sources += [ "libtiff/tif_lerc.c" ]
+}
+if (enable_lzma) {
+    all_libtiff_sources += [ "libtiff/tif_lzma.c" ]
+}
+if (enable_zstd) {
+    all_libtiff_sources += [ "libtiff/tif_zstd.c" ]
+}
+if (enable_webp) {
+    all_libtiff_sources += [ "libtiff/tif_webp.c" ]
+}
+
+config("libtiff_config") {
+    visibility = [ ":*" ]
+    include_dirs = [
+        "$code_dir/libtiff",
+        "$code_dir/config",
+    ]
+}
+
+action("libtiff_configure") {
+   script = "install.sh" 
+   args = [
+        rebase_path(src_path),
+        rebase_path(out_dir),
+   ]
+   #inputs = [ src_path ]
+   inputs = []
+   foreach (src, all_libtiff_sources) {
+        inputs += [ rebase_path(src_path) + "/" + src ]
+   }
+
+   outputs = []
+   foreach(src, all_libtiff_sources) {
+        outputs += ["$code_dir/" + src]
+   } 
+
+   outputs += [ "$code_dir/config/config.h" ]
+}
+
+ohos_shared_library("libtiff") {
+    public_configs = [ ":libtiff_config" ]
+    sources = []
+    defines = []
+    external_deps = []
+    
+    if (enable_lzw) {
+        defines += [ "LZW_SUPPORT" ]
+    }
+    if (enable_packbits) {
+        defines += [ "PACKBITS_SUPPORT" ]
+    }
+    if (enable_thunder) {
+        defines += [ "THUNDER_SUPPORT" ]
+    }
+    if (enable_next) {
+        defines += [ "NEXT_SUPPORT" ]
+    }
+    if (enable_jpeg) {
+        defines += [ "JPEG_SUPPORT" ]
+        external_deps += [ "libjpeg-turbo:turbojpeg" ]
+    }
+    if (enable_ojpeg) {
+        defines += [ "OJPEG_SUPPORT" ]
+        external_deps += [ "libjpeg-turbo:turbojpeg", ]
+    }
+    if (enable_ccitt) {
+        defines += [ "CCITT_SUPPORT" ]
+    }
+    if (enable_jbig) {
+        defines += [ "JBIG_SUPPORT" ]
+    }
+    if (enable_zip) {
+        defines += [ "ZIP_SUPPORT" ]
+        external_deps += [ "zlib:libz" ]
+    }
+    if (enable_pixarlog) {
+        defines += [ "PIXARLOG_SUPPORT" ]
+        external_deps += [ "zlib:libz" ]
+    }
+    if (enable_logluv) {
+        defines += [ "LOGLUV_SUPPORT" ]
+    }
+    if (enable_lerc) {
+        defines += [ "LERC_SUPPORT" ]
+    }
+    if (enable_lzma) {
+        defines += [ "LZMA_SUPPORT" ]
+        external_deps += [ "lzma:lzma_shared" ]
+    }
+    if (enable_zstd) {
+        defines += [ "ZSTD_SUPPORT" ]
+    }
+    if (enable_webp) {
+        defines += [ "WEBP_SUPPORT" ]
+    }
+    foreach(src, all_libtiff_sources) {
+        sources += [ "$code_dir/" + src ]
+    }
+    deps = [ ":libtiff_configure" ]
+
+    subsystem_name = "thirdparty"
+    part_name = "libtiff"
+    innerapi_tags = [ "platformsdk" ]
+    output_name = "libtiff"
+    output_extension = "so"
+    install_images = [ "system" ]
+    ldflags = [ "-Wl,-Map=libtiff.map" ]
+
+}
