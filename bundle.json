@@ -1,0 +1,50 @@
+{
+    "name": "@ohos/libtiff",
+    "description": "libtiff provides a library for reading and writing TIFF (Tagged Image File Format).",
+    "version": "4.7.0",
+    "license": "libtiff license",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "third_party/libtiff"
+    },
+    "dirs": {},
+    "scripts": {},
+    "licensePath": "LICENSE.md",
+    "readmePath": {
+        "en": "README"
+    },
+    "component": {
+        "name": "libtiff",
+        "subsystem": "thirdparty",
+        "syscap": [],
+        "features": [],
+        "adapted_system_type": [ "standard" ],
+        "rom": "",
+        "ram": "",
+        "deps": {
+            "components": [ 
+                "c_utils",
+                "zlib",
+                "libjpeg-turbo",
+                "lzma"
+            ],
+            "third_party": []
+        },
+        "build": {
+            "sub_component": ["//third_party/libtiff:libtiff"],
+            "inner_kits": [
+                {
+                    "name": "//third_party/libtiff:libtiff",
+                    "header": {
+                        "header_files": [
+                            "tiff.h",
+                            "tiffio.h"
+                        ],
+                        "header_base": "//third_party/libtiff/libtiff"
+                    }
+                }
+            ],
+            "test": []
+        }
+    }
+}

@@ -12,6 +12,8 @@
                 <policyitem type="license" name="libtiff" path=".*" desc="Allow libtiff header globally"/>    
                 <policyitem type="copyright" name="Sam Leffler" path=".*" desc="Exact Match License File"/>
                 <policyitem type="copyright" name="Silicon Graphics" path=".*" desc="Exact Match License File"/>
+                <policyitem type="compatibility" name="Apache-2.0" path=".*" desc="Allow OHOS Build Script"/>
+                <policyitem type="license" name="Apache-2.0" path=".*" desc="Allow OHOS Build Script"/>
             </policy>
         </policylist>
         <filefilterlist>
@@ -43,6 +45,8 @@
                 <filteritem type="filename" name=".git-blame-ignore-revs" desc="Git"/>
                 <filteritem type="filename" name=".pre-commit-config.yaml" desc="Config"/>
                 <filteritem type="filepath" name=".*HOWTO-.*" desc="Docs"/>
+                <filteritem type="filename" name="BUILD.gn" desc="Build script"/>
+                <filteritem type="filename" name="install.sh" desc="Install script"/>
             </filefilter>
             <filefilter name="binaryFilter" desc="Binary files check filter">
                 <filteritem type="filepath" name="doc/.*" desc="Docs"/>
