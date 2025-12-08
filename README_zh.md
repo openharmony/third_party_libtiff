@@ -1,6 +1,6 @@
 # libtiff
-原始仓来源：https://gitlab.com/libtiff/libtiff
-仓库包含第三方开源软件libtiff，libtiff用于读取、写入和操作TIFF（Tagged Image File Format）图像文件。它提供了一套标准化的接口来处理TIFF格式的各种复杂特性，包括多种压缩算法（如 LZW, Deflate, JPEG 等）的支持。在OpenHarmony中，libtiff主要作为图形图像子系统的基础组件，提供TIFF图片格式的编解码能力。
+
+仓库包含第三方开源软件libtiff（原始仓来源：https://gitlab.com/libtiff/libtiff），libtiff用于读取、写入和操作TIFF（Tagged Image File Format）图像文件。它提供了一套标准化的接口来处理TIFF格式的各种复杂特性，包括多种压缩算法（如 LZW, Deflate, JPEG 等）的支持。在OpenHarmony中，libtiff主要作为图形图像子系统的基础组件，提供TIFF图片格式的编解码能力。
 
 ## 目录结构
 
@@ -93,7 +93,9 @@ ohos_shared_library("tiffplugin") {
 ```
 
 ### 3. 应用示例
+
 在C/C++代码中调用libtiff接口读取TIFF文件信息的简单实示例如下：
+
 ```
 #include <iostream>
 #include "tiffio.h"
@@ -116,7 +118,6 @@ void ReadTiffInfo(const char* fileName) {
   TIFFClose();
 }
 ```
-
 
 ## libtiff相关内容
 
