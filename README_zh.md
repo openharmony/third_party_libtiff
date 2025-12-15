@@ -1,6 +1,8 @@
 # libtiff
+原始仓来源：https://gitlab.com/libtiff/libtiff
 
-仓库包含第三方开源软件libtiff（原始仓来源：https://gitlab.com/libtiff/libtiff），libtiff用于读取、写入和操作TIFF（Tagged Image File Format）图像文件。它提供了一套标准化的接口来处理TIFF格式的各种复杂特性，包括多种压缩算法（如 LZW, Deflate, JPEG 等）的支持。在OpenHarmony中，libtiff主要作为图形图像子系统的基础组件，提供TIFF图片格式的编解码能力。
+
+仓库包含第三方开源软件libtiff，libtiff用于读取、写入和操作TIFF（Tagged Image File Format）图像文件。它提供了一套标准化的接口来处理TIFF格式的各种复杂特性，包括多种压缩算法（如 LZW, Deflate, JPEG 等）的支持。在OpenHarmony中，libtiff主要作为图形图像子系统的基础组件，提供TIFF图片格式的编解码能力。
 
 ## 目录结构
 
@@ -18,84 +20,72 @@ README.md   README说明
 ```
 
 ## 使用场景
-OpenHarmony主要编译使用libtiff仓库中libtiff/目录下的源代码和头文件。libtiff通常作为图像框架或打印服务的依赖模块，来实现具体的TIFF格式图片的加载与解码功能。
+OpenHarmony编译使用libtiff仓库中libtiff/目录下的源代码和头文件。libtiff通常作为图像框架的依赖模块，来实现具体的TIFF格式图片的加载与解码功能。
 
 ### 1. libtiff的编译
-libtiff 的编译入口在其根目录下的BUILD.gn中。简单示意如下：
 
+libtiff引入OpenHarmony的thirdparty目录下，使用OpenHarmony中依赖部件的方式进行编译。更多信息参考：https://gitee.com/openharmony/manifest/tree/master
+
+
+（1）主干代码下载
 ```
-# 定义源码列表
-libtiff_source = [
-    "//third_party/libtiff/libtiff/tif_aux.c",
-    "//third_party/libtiff/libtiff/tif_close.c",
-    "//third_party/libtiff/libtiff/tif_codec.c",
-    "//third_party/libtiff/libtiff/tif_color.c",
-    "//third_party/libtiff/libtiff/tif_compress.c",
-    "//third_party/libtiff/libtiff/tif_dir.c",
-    "//third_party/libtiff/libtiff/tif_dirinfo.c",
-    "//third_party/libtiff/libtiff/tif_dirread.c",
-    "//third_party/libtiff/libtiff/tif_dirwrite.c",
-    "//third_party/libtiff/libtiff/tif_dumpmode.c",
-    "//third_party/libtiff/libtiff/tif_error.c",
-    "//third_party/libtiff/libtiff/tif_extension.c",
-    "//third_party/libtiff/libtiff/tif_fax3.c",
-    "//third_party/libtiff/libtiff/tif_fax3sm.c",
-    "//third_party/libtiff/libtiff/tif_flush.c",
-    "//third_party/libtiff/libtiff/tif_getimage.c",
-    # ... 其他 tif_*.c 文件
-    "//third_party/libtiff/libtiff/tif_version.c",
-    "//third_party/libtiff/libtiff/tif_write.c",
-    "//third_party/libtiff/libtiff/tif_zip.c",
-]
-
-ohos_shared_library("libtiff") {
-    sources = libtiff_source
-    
-    include_dirs = [
-        "//third_party/libtiff/libtiff",
-    ]
-
-    # libtiff 通常依赖 zlib 和 libjpeg 来支持特定的压缩格式
-    external_deps = [
-        "zlib:libz",
-        "libjpeg-turbo:turbojpeg",
-    ]
-
-    subsystem_name = "thirdparty"
-    part_name = "libtiff"
-    output_name = "libtiff"
-    output_extension = "so"
-    install_images = [ "system" ]
-    ldflags = [ "-Wl,-Map=libtiff.map" ]
-}
+repo init -u https://gitee.com/openharmony/manifest.git -b master --no-repo-verify
+repo sync -c
+repo forall -c 'git lfs pull'
 ```
-### 2. 使用libtiff
 
-在需要使用libtiff的模块构建配置中，增加对应依赖，示例如下：
-
+（2）在使用的模块进行依赖
 ```
-ohos_shared_library("tiffplugin") {
+deps = ["//third_party/libtiff:libtiff"]
+```
 
-  sources = [
-    ......
-  ]
+（3）预处理
+```
+./build/prebuilts_download.sh
+```
 
-  include_dirs = [
-    ......
-  ]
+（4）编译
+```
+./build.sh --product-name {product_name}
+```
+
+
+### 3. OpenHarmony中的使用
+
+（1）面向对象
+系统开发者， tiff图像相关开发者
+
+（2）指导参考
+
+开发者在需要使用libtiff的模块下，配置BUILD.gn，添加依赖：
+参考链接：https://gitee.com/openharmony/build/tree/master
+```
+import("//build/ohos.gni")
+ohos_shared_library("helloworld") {
+  sources = ["demo.cpp"]
+  include_dirs = []
+  cflags = []
+  cflags_c = []
+  cflags_cc = []
+  ldflags = []
+  configs = []
+  deps =[]  # 部件内模块依赖
 
   external_deps = [
     "libtiff:libtiff",
   ]
 
-...
+  output_name = ""           # 可选，模块输出名
+  output_extension = ""      # 可选，模块名后缀
+  module_installinstall_dir = ""  # 可选，模块安装相对路径，相对于/system/lib64或/system/lib；如果有module_install_dir配置时，该配置不生效
+  install_images = []        # 可选，缺省值system，指定模块安装到那个分区镜像中，可以指定多个
+
+  part_name = "" # 必选，所属部件名称
 }
+
 ```
 
-### 3. 应用示例
-
-在C/C++代码中调用libtiff接口读取TIFF文件信息的简单实示例如下：
-
+demo.cpp引入头文件，使用相应的函数，具体指导参考：[libtiff文档](https://libtiff.gitlab.io/libtiff/)
 ```
 #include <iostream>
 #include "tiffio.h"
@@ -118,12 +108,6 @@ void ReadTiffInfo(const char* fileName) {
   TIFFClose();
 }
 ```
-
-## libtiff相关内容
-
-[libtiff主页](https://gitlab.com/libtiff/libtiff) 
-
-[libtiff文档](https://libtiff.gitlab.io/libtiff/)
 
 ## License
 
