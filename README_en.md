@@ -79,7 +79,7 @@ external_deps += [ "libtiff:libtiff" ]
 
 ## Feature Support
 
-OpenHarmony currently integrates libtiff primarily for decoding and displaying TIFF images. Encoding (writing) of TIFF images and modification of metadata tags are not yet supported. For more advanced features and interfaces of libtiff, please refer to: https://libtiff.gitlab.io/libtiff/functions.html
+OpenHarmony currently integrates libtiff primarily for decoding and displaying TIFF images. Encoding (writing) of TIFF images and modification of metadata tags are not yet supported. 
 
 ## License
 
