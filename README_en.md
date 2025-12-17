@@ -77,63 +77,9 @@ external_deps += [ "libtiff:libtiff" ]
   tif：TIFF file context
   ```
 
-## Constraints and Extensions
+## Feature Support
 
-OpenHarmony currently integrates libtiff's decoding capabilities for reading and displaying TIFF images. Besides decoding, libtiff also possesses encoding capabilities, supporting the modification, addition, or deletion of metadata tags in TIFF files.
-
-Extension Example (Writing a TIFF Image):
-
-1. Open the file for writing
-
-  ```
-  TIFF *TIFFOpen(const char *filename, const char *mode);
-  filename：The name of the file
-  mode：The file opening mode ("w" for writing)
-  ```
-
-2. Set necessary metadata tags
-
-  ```
-  int TIFFSetField(TIFF *tif, uint32_t tag, ...);
-  tif：TIFF file context
-  tag：The metadata tag to set
-  ...：Variable argument list, passing the value corresponding to the tag 
-
-  Example:
-  //Set basic info: width, height, bit depth, compression, etc.
-  TIFFSetField(tif, TIFFTAG_IMAGEWIDTH, width);
-  TIFFSetField(tif, TIFFTAG_IMAGELENGTH, height);
-  TIFFSetField(tif, TIFFTAG_SAMPLESPERPIXEL, 3); // RGB
-  TIFFSetField(tif, TIFFTAG_BITSPERSAMPLE, 8);   // 8-bit
-  TIFFSetField(tif, TIFFTAG_COMPRESSION, COMPRESSION_LZW); // Set LZW compression
-  ```
-
-3. Write pixel data
-
-  ```
-  int TIFFWriteScanline(TIFF *tif, void *buf, uint32_t row, uint16_t sample);
-  tif：TIFF file context
-  buf： Buffer containing the pixel data for the current row
-  row：The row number currently being written
-  sample：sample: Sample index (usually 0)
-
-  Example:
-  for (int row = 0; row < height; row++) {
-    if (TIFFWriteScanline(tif, &buf[row * width * 3], row, 0) < 0) {
-        break; //  Writing failed
-    }
-  }
-  ```
-
-4. Close and save the file
-
-  ```
-  void TIFFClose(TIFF *tif)；
-  tif：TIFF file context
-  ```
-
-
-For more libtiff interfaces, please refer to: https://libtiff.gitlab.io/libtiff/functions.html
+OpenHarmony currently integrates libtiff primarily for decoding and displaying TIFF images. Encoding (writing) of TIFF images and modification of metadata tags are not yet supported. For more advanced features and interfaces of libtiff, please refer to: https://libtiff.gitlab.io/libtiff/functions.html
 
 ## License
 

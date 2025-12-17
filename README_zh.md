@@ -77,63 +77,9 @@ external_deps += [ "libtiff:libtiff" ]
   tif：TIFF文件上下文环境
   ```
 
-## 约束与扩展
+## 功能支持说明
 
-OpenHarmony目前仅集成了libtiff的解码能力，用于读取和显示tiff图片。除解码外，libtiff本身还具备编码能力，支持修改、添加或删除TIFF文件的元数据标签。
-
-扩展能力举例（写入TIFF图片）：
-
-1. 打开文件用于写入
-
-  ```
-  TIFF *TIFFOpen(const char *filename, const char *mode);
-  filename：文件名
-  mode：打开模式（"w"表示写入）
-  ```
-
-2. 设置必要的元数据标签
-
-  ```
-  int TIFFSetField(TIFF *tif, uint32_t tag, ...);
-  tif：TIFF文件上下文环境
-  tag：要设置的元数据标签
-  ...：可变参数，传入tag对应的值 
-
-  具体示例如：
-  //设置基本信息：宽、高、位深、压缩方式等
-  TIFFSetField(tif, TIFFTAG_IMAGEWIDTH, width);
-  TIFFSetField(tif, TIFFTAG_IMAGELENGTH, height);
-  TIFFSetField(tif, TIFFTAG_SAMPLESPERPIXEL, 3); // RGB
-  TIFFSetField(tif, TIFFTAG_BITSPERSAMPLE, 8);   // 8位
-  TIFFSetField(tif, TIFFTAG_COMPRESSION, COMPRESSION_LZW); // LZW压缩
-  ```
-
-3. 写入像素数据
-
-  ```
-  int TIFFWriteScanline(TIFF *tif, void *buf, uint32_t row, uint16_t sample);
-  tif：TIFF文件上下文环境
-  buf：包含当前行像素数据的缓冲区
-  row：当前写入的行号
-  sample：样本索引（通常为0）
-
-  具体示例如：
-  for (int row = 0; row < height; row++) {
-    if (TIFFWriteScanline(tif, &buf[row * width * 3], row, 0) < 0) {
-        break; // 写入失败
-    }
-  }
-  ```
-
-4. 关闭并保存文件
-
-  ```
-  void TIFFClose(TIFF *tif)；
-  tif：TIFF文件上下文环境
-  ```
-
-
-更多libtiff接口可以参考https://libtiff.gitlab.io/libtiff/functions.html
+OpenHarmony目前仅集成了libtiff的解码能力，用于读取和显示TIFF图片。暂未开放图片编码及元数据编辑（如修改或添加标签）功能。更多libtiff接口与能力详情，可参考：https://libtiff.gitlab.io/libtiff/functions.html
 
 ## License
 
