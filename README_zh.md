@@ -79,7 +79,7 @@ external_deps += [ "libtiff:libtiff" ]
 
 ## 功能支持说明
 
-OpenHarmony目前仅集成了libtiff的解码能力，用于读取和显示TIFF图片。暂未开放图片编码及元数据编辑（如修改或添加标签）功能。更多libtiff接口与能力详情，可参考：https://libtiff.gitlab.io/libtiff/functions.html
+OpenHarmony目前仅集成了libtiff的解码能力，用于读取和显示TIFF图片。暂不支持图片编码及元数据编辑（如修改或添加标签）功能。
 
 ## License
 
