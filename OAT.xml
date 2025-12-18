@@ -8,59 +8,142 @@
                 <policyitem type="compatibility" name="MIT" path=".*" desc="MIT"/>
                 <policyitem type="compatibility" name="BSD-3-Clause" path=".*" desc="BSD"/>
                 <policyitem type="compatibility" name="AllPermissive" path=".*" desc="Permissive"/>
-                <policyitem type="compatibility" name="InvalidLicense" path=".*" desc="Allow Misc"/>
-                <policyitem type="license" name="libtiff" path=".*" desc="Allow libtiff header globally"/>    
+                <policyitem type="compatibility" name="HPND" path=".*" desc="Allow HPND license"/>
+                <policyitem type="license" name="HPND" path=".*" desc="Allow HPND license"/>
+                <policyitem type="compatibility" name="Permission Notice" path=".*" desc="Permissive"/>
+                <policyitem type="license" name="libtiff" path=".*" desc="Allow libtiff header globally"/>
                 <policyitem type="copyright" name="Sam Leffler" path=".*" desc="Exact Match License File"/>
                 <policyitem type="copyright" name="Silicon Graphics" path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright (c) 1988-1996 Sam Leffler" path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright (c) 1991-1996 Silicon Graphics, Inc." path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright (c( 1996 USAF Phillips Laboratory" path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="InvalidCopyright" path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="NULL" path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright 1990 by Digital Equipment Corporation, Maynard, Massachusetts." path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright (c) 1990 by Sun Microsystems, Inc." path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright (c) 2003 Ross Finlayson" path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright (c) 1996 Mike Johnson|Copyright (c) 1996 BancTec AB" path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright 1991 by Digital Equipment Corporation, Maynard, Massachusetts." path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright (c) 2009 Frank Warmerdam" path=".*" desc="Exact Match License File"/>
                 <policyitem type="compatibility" name="Apache-2.0" path=".*" desc="Allow OHOS Build Script"/>
                 <policyitem type="license" name="Apache-2.0" path=".*" desc="Allow OHOS Build Script"/>
+                <policyitem type="license" name="Permission Notice" path=".*" desc="Allow OHOS Build Script"/>
+                <policyitem type="license" name="MIT" path=".*" desc="Allow OHOS Build Script"/>
+                <policyitem type="license" name="BSD-3-Clause" path=".*" desc="Allow OHOS Build Script"/>
+                <policyitem type="copyright" name="Copyright (c) 1997 Greg Ward Larson" path=".*" desc="Upstream copyright from libtiff"/>
+                <policyitem type="copyright" name="Copyright (c) 1997 Silicon Graphics, Inc." path=".*" desc="Upstream copyright from libtiff"/> 
+                <policyitem type="copyright" name="Copyright (c) 1988-1997 Sam Leffler" path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright (c) 1991-1997 Silicon Graphics, Inc." path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright (c) 2022 Even Rouault" path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright (c) 1996-1997 Sam Leffler" path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright (c) 1996 Pixar" path=".*" desc="Exact Match License File"/> 
+                <policyitem type="copyright" name="Copyright (c) 1991-1997 Sam Leffler" path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright (c) 1991-1997 Silicon Graphics, Inc." path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright (C) 1990, 1995  Frank D. Cringle." path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright (c) 1996 Mike Johnson" path=".*" desc="Exact Match License File"/>
+                <policyitem type="copyright" name="Copyright (c) 1996 BancTec AB" path=".*" desc="Exact Match License File"/>
             </policy>
         </policylist>
         <filefilterlist>
             <filefilter name="defaultFilter" desc="Files not to check">
-                <filteritem type="filepath" name="libtiff/.*" desc="Skip core source headers"/>
-                <filteritem type="filepath" name="tools/.*" desc="Skip tools headers"/>
-                <filteritem type="filepath" name="contrib/.*" desc="Skip contrib headers"/>
-                <filteritem type="filepath" name="port/.*" desc="Skip port headers"/>
-                <filteritem type="filepath" name="doc/.*" desc="Skip docs"/>
-                <filteritem type="filepath" name="test/.*" desc="Skip tests"/>
-                <filteritem type="filepath" name="build/.*" desc="Skip build"/>
-                <filteritem type="filepath" name="cmake/.*" desc="Skip cmake"/>
-                <filteritem type="filepath" name="m4/.*" desc="Skip macros"/>
-                <filteritem type="filepath" name="archive/.*" desc="Skip archive"/>
-                <filteritem type="filepath" name="contrib/win_dib/.*" desc="Skip win"/>
-                <filteritem type="filename" name="README.md" desc="Readme"/>
-                <filteritem type="filename" name="README.OpenSource" desc="Readme"/>
-                <filteritem type="filename" name="README" desc="Readme"/>
-                <filteritem type="filename" name="ChangeLog" desc="Log"/>
-                <filteritem type="filename" name="COMMITTERS" desc="Meta"/>
-                <filteritem type="filename" name="TODO" desc="Meta"/>
-                <filteritem type="filename" name="VERSION" desc="Meta"/>
-                <filteritem type="filename" name="RELEASE-DATE" desc="Meta"/>
-                <filteritem type="filename" name="autogen.sh" desc="Script"/>
-                <filteritem type="filename" name="configure.ac" desc="Config"/>
-                <filteritem type="filename" name="Makefile.am" desc="Make"/>
-                <filteritem type="filename" name="tiff.spec" desc="Spec"/>
-                <filteritem type="filename" name="placeholder.h" desc="Header"/>
-                <filteritem type="filename" name=".git-blame-ignore-revs" desc="Git"/>
-                <filteritem type="filename" name=".pre-commit-config.yaml" desc="Config"/>
-                <filteritem type="filepath" name=".*HOWTO-.*" desc="Docs"/>
-                <filteritem type="filename" name="BUILD.gn" desc="Build script"/>
-                <filteritem type="filename" name="install.sh" desc="Install script"/>
+                <filteritem type="filename" name="*.gif|*.jpg|*.png|*.tif|*.iptc|*.tiff|*.pgm|*.g3|*.rst|*.ppm|*.pbm" desc="Img"/>
+                <filteritem type="filename" name="*.yaml" desc="配置文件"/>
+                <filteritem type="filepath" name="BUILD.gn" desc="构建文件"/>
+                <filteritem type="filepath" name="COMMITTERS" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="ChangeLog" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="HOWTO-RELEASE" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="build/gitlab-ci" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="tools/tiffmedian.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="HOWTO-SECURITY-RELEASE" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name=".git-blame-ignore-revs" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="build/test_cmake/test.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="build/test_cmake_no_target/test.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="contrib/win_dib/README.Tiffile" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="contrib/win_dib/README.tiff2dib" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="test/.*.sh" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="TODO" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="cmake/list-manpage-dependencies.py" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="contrib/win_dib/tiff2dib.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="cmake/list-manpages.py" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="libtiff/tif_fax3sm.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="port/libport_config.vc.h" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="test/refs/o-tiff2ps-PS2.ps" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="contrib/stream/tiffstream.cpp" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="test/test_IFD_enlargement.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="test/refs/o-tiff2ps-PS3.ps" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="contrib/stream/tiffstream.h" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="RELEASE-DATE" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="contrib/dbs/xtiff/patchlevel.h" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="libtiff/uvcode.h" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="contrib/tags/listtif.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="libtiff/tif_jpeg_12.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="test/test_transferfunction_write_read.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="contrib/dbs/xtiff/xtifficon.h" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="contrib/tags/maketif.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="VERSION" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="contrib/pds/tif_imageiter.h" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="contrib/tags/xtif_dir.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="m4/ice_find_athena.m4" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="autogen.sh" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="archive/tools/rasterfile.h" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="contrib/win_dib/Tiffile.cpp" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="test/test_directory.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="contrib/iptcutil/iptcutil.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="doc/conf.py" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="install.sh" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="archive/tools/ycbcr.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="placeholder.h" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="m4/acinclude.m4" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="test/refs/o-tiff2ps-EPS1.ps" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="test/refs/o-tiff2ps-PS1.ps" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="port/dummy.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="libtiff/tif_ojpeg.c" desc="上游文件，没有license"/>
+                <filteritem type="filepath" name="contrib/tags/xtiffio.h" desc="上游文件，没有license"/>   
+                <filteritem type="filepath" name="contrib/tags/xtiffiop.h" desc="上游文件，没有license"/>   
+                <filteritem type="filepath" name="README.OpenSource " desc="readme.opensource"/>   
             </filefilter>
-            <filefilter name="binaryFilter" desc="Binary files check filter">
+                <filefilter name="binaryFilter" desc="Binary files check filter">
                 <filteritem type="filepath" name="doc/.*" desc="Docs"/>
                 <filteritem type="filepath" name="test/.*" desc="Tests"/>
                 <filteritem type="filepath" name="archive/.*" desc="Archive"/>
                 <filteritem type="filepath" name="contrib/.*" desc="Contrib"/>
-                <filteritem type="filepath" name=".*\.gif" desc="Img"/>
-                <filteritem type="filepath" name=".*\.jpg" desc="Img"/>
-                <filteritem type="filepath" name=".*\.png" desc="Img"/>
-                <filteritem type="filepath" name=".*\.tif" desc="Img"/>
-                <filteritem type="filepath" name=".*\.tiff" desc="Img"/>
-                <filteritem type="filepath" name=".*\.iptc" desc="Data"/>
+                <filteritem type="filename" name="*.gif" desc="Img"/>
+                <filteritem type="filename" name="*.jpg" desc="Img"/>
+                <filteritem type="filename" name="*.png" desc="Img"/>
+                <filteritem type="filename" name="*.tif" desc="Img"/>
+                <filteritem type="filename" name="*.tiff" desc="Img"/>
+                <filteritem type="filename" name="*.iptc" desc="Data"/>
                 <filteritem type="filename" name="test.iptc" desc="Data"/>
             </filefilter>
         </filefilterlist>
+        <licensematcherlist>
+            <licensematcher name="libtiff" desc="If the scanning result is InvalidLicense, you can define matching rules here. Note that quotation marks must be escaped.">
+                <licensetext name=" Permission to use, copy, modify, distribute, and sell this software and its documentation for any purpose is hereby granted without fee, provided that (i) the above copyright notices and this permission notice appear in all copies of the software and related documentation, and (ii) the names of Sam Leffler and Silicon Graphics may not be used in any advertising or publicity relating to the software without the specific, prior written permission of Sam Leffler and Silicon Graphics. THE SOFTWARE IS PROVIDED &quot;AS-IS&quot; AND WITHOUT WARRANTY OF ANY KIND, EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL SAM LEFFLER OR SILICON GRAPHICS OR ANY OTHER COPYRIGHT HOLDERS BE LIABLE FOR ANY SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER OR NOT ADVISED OF THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY OF LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE. " desc=""/>
+                <licensetext name=" * Permission to use, copy, modify, distribute, and sell this software and * its documentation for any purpose is hereby granted without fee, provided * that (i) the above copyright notices and this permission notice appear in * all copies of the software and related documentation, and (ii) the names of * Sam Leffler, Greg Larson and Silicon Graphics may not be used in any * advertising or publicity relating to the software without the specific, * prior written permission of Sam Leffler, Greg Larson and Silicon Graphics. * * THE SOFTWARE IS PROVIDED &quot;AS-IS&quot; AND WITHOUT WARRANTY OF ANY KIND, * EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY * WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. * * IN NO EVENT SHALL SAM LEFFLER, GREG LARSON OR SILICON GRAPHICS BE LIABLE * FOR ANY SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, * OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, * WHETHER OR NOT ADVISED OF THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY OF * LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE * OF THIS SOFTWARE. " desc=""/>
+                <licensetext name=" Permission to use, copy, modify, distribute, and sell this software for any purpose is hereby granted without fee, provided that (i) the above copyright notices and this permission notice appear in all copies of the software and related documentation, and (ii) the names of Mike Johnson and BancTec may not be used in any advertising or publicity relating to the software. THE SOFTWARE IS PROVIDED &quot;AS-IS&quot; AND WITHOUT WARRANTY OF ANY KIND, EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL MIKE JOHNSON OR BANCTEC BE LIABLE FOR ANY SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER OR NOT ADVISED OF THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY OF LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE. " desc=""/>
+                <licensetext name=" * Permission to use, copy, modify, distribute, and sell this software and * its documentation for any purpose is hereby granted without fee, provided * that (i) the above copyright notices and this permission notice appear in * all copies of the software and related documentation, and (ii) the name of * Ross Finlayson may not be used in any advertising or * publicity relating to the software without the specific, prior written * permission of Ross Finlayson. * * THE SOFTWARE IS PROVIDED &quot;AS-IS&quot; AND WITHOUT WARRANTY OF ANY KIND, * EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY * WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. * * IN NO EVENT SHALL ROSS FINLAYSON BE LIABLE FOR * ANY SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, * OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, * WHETHER OR NOT ADVISED OF THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY OF * LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE * OF THIS SOFTWARE. " desc=""/>
+                <licensetext name=" dnl Permission to use, copy, modify, distribute, and sell this software and dnl its documentation for any purpose is hereby granted without fee, provided dnl that (i) the above copyright notices and this permission notice appear in dnl all copies of the software and related documentation, and (ii) the names of dnl Sam Leffler and Silicon Graphics may not be used in any advertising or dnl publicity relating to the software without the specific, prior written dnl permission of Sam Leffler and Silicon Graphics. dnl dnl THE SOFTWARE IS PROVIDED &quot;AS-IS&quot; AND WITHOUT WARRANTY OF ANY KIND, dnl EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY dnl WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. dnl dnl IN NO EVENT SHALL SAM LEFFLER OR SILICON GRAPHICS BE LIABLE FOR dnl ANY SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, dnl OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, dnl WHETHER OR NOT ADVISED OF THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY OF dnl LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE dnl OF THIS SOFTWARE. " desc=""/>
+                <licensetext name=" * Permission to use, copy, modify, distribute, and sell this software and * its documentation for any purpose is hereby granted without fee, provided * that (i) the above copyright notices and this permission notice appear in * all copies of the software and related documentation, and (ii) the names of * Pixar, Sam Leffler and Silicon Graphics may not be used in any advertising or * publicity relating to the software without the specific, prior written * permission of Pixar, Sam Leffler and Silicon Graphics. * * THE SOFTWARE IS PROVIDED &quot;AS-IS&quot; AND WITHOUT WARRANTY OF ANY KIND, * EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY * WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. * * IN NO EVENT SHALL PIXAR, SAM LEFFLER OR SILICON GRAPHICS BE LIABLE FOR * ANY SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, * OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, * WHETHER OR NOT ADVISED OF THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY OF * LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE * OF THIS SOFTWARE. " desc=""/>
+                <licensetext name=" * Permission to use, copy, modify, distribute, and sell this software and its documentation for any purpose is hereby granted without fee, provided that (i) the above copyright notices and this permission notice appear in all copies of the software and related documentation, and (ii) the names of Sam Leffler and Silicon Graphics may not be used in any advertising or publicity relating to the software without the specific, prior written permission of Sam Leffler and Silicon Graphics. THE SOFTWARE IS PROVIDED &quot;AS-IS&quot; AND WITHOUT WARRANTY OF ANY KIND, EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL SAM LEFFLER OR SILICON GRAPHICS BE LIABLE FOR ANY SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER OR NOT ADVISED OF THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY OF LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.  " desc=""/>
+                <licensetext name="  * Permission to use, copy, modify, and distribute this software and its documentation for any purpose and without fee is hereby granted, provided that the above copyright notice appear in all copies and that both that copyright notice and this permission notice appear in  supporting documentation.  This file is provided AS IS with no warranties of any kind.  The author shall have no liability with respect to the infringement of copyrights,* trade secrets or any patents by this file or any part thereof.  In no  event will the author be liable for any lost revenue or profits or other special, indirect and consequential damages.  " desc=""/>
+            </licensematcher>
+            <licensematcher name="MIT" desc="If the scanning result is InvalidLicense, you can define matching rules here. Note that quotation marks must be escaped.">
+                <licensetext name=" * Permission is hereby granted, free of charge, to any person obtaining a * copy of this software and associated documentation files (the &quot;Software&quot;), * to deal in the Software without restriction, including without limitation * the rights to use, copy, modify, merge, publish, distribute, sublicense, * and/or sell copies of the Software, and to permit persons to whom the * Software is furnished to do so, subject to the following conditions: * * The above copyright notice and this permission notice shall be included * in all copies or substantial portions of the Software. * * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER * DEALINGS IN THE SOFTWARE. " desc=""/>
+                <licensetext name=" * Permission is hereby granted, free of charge, to any person obtaining a * copy of this software and associated documentation files (the &quot;Software&quot;), * to deal in the Software without restriction, including without limitation * the rights to use, copy, modify, merge, publish, distribute, sublicense, * and/or sell copies of the Software, and to permit persons to whom the * Software is furnished to do so, subject to the following conditions: * * The above copyright notice and this permission notice shall be included * in all copies or substantial portions of the Software. * * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER * DEALINGS IN THE SOFTWARE. " desc=""/>
+            </licensematcher>
+            <licensematcher name="GPL-2.0-or-later" desc="If the scanning result is InvalidLicense, you can define matching rules here. Note that quotation marks must be escaped.">
+                <licensetext name=" dnl This program is free software; you can redistribute it and/or modify it dnl under the terms of the GNU General Public License as published by the dnl Free Software Foundation; either version 2 of the License, or (at your dnl option) any later version. dnl dnl This program is distributed in the hope that it will be useful, but dnl WITHOUT ANY WARRANTY; without even the implied warranty of dnl MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General dnl Public License for more details. dnl dnl You should have received a copy of the GNU General Public License along dnl with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;. dnl dnl As a special exception, the respective Autoconf Macro&apos;s copyright owner dnl gives unlimited permission to copy, distribute and modify the configure dnl scripts that are the output of Autoconf when processing the Macro. You dnl need not follow the terms of the GNU General Public License when using dnl or distributing such scripts, even though portions of the text of the dnl Macro appear in them. The GNU General Public License (GPL) does govern dnl all other use of the material that constitutes the Autoconf Macro. dnl dnl This special exception to the GPL applies to versions of the Autoconf dnl Macro released by the Autoconf Archive. When you make and distribute a dnl modified version of the Autoconf Macro, you may extend this special dnl exception to the GPL to apply to your modified version as well. " desc=""/>
+            </licensematcher>
+            <licensematcher name="HPND" desc="If the scanning result is InvalidLicense, you can define matching rules here. Note that quotation marks must be escaped.">
+                <licensetext name=" Permission to use, copy, modify, and distribute this software and its documentation for any purpose and without fee is hereby granted,  provided that the above copyright notice appear in all copies and that * both that copyright notice and this permission notice appear in * supporting documentation, and that the name of Digital not be * used in advertising or publicity pertaining to distribution of the * software without specific, written prior permission. * * DIGITAL DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, INCLUDING * ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, IN NO EVENT SHALL * DIGITAL BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR * ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, * WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, * ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS * SOFTWARE. " desc=""/>
+            </licensematcher>
+            <licensematcher name="BSD-3-Clause" desc="If the scanning result is InvalidLicense, you can define matching rules here. Note that quotation marks must be escaped.">
+                <licensetext name=" * Redistribution and use in source and binary forms, with or without * modification, are permitted provided that the following conditions * are met: * 1. Redistributions of source code must retain the above copyright * notice, this list of conditions and the following disclaimer. * 2. Redistributions in binary form must reproduce the above copyright * notice, this list of conditions and the following disclaimer in the * documentation and/or other materials provided with the distribution. * 3. Neither the name of the University nor the names of its contributors * may be used to endorse or promote products derived from this software * without specific prior written permission. * * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS&apos;&apos; AND * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE * ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF * SUCH DAMAGE. " desc=""/>
+            </licensematcher>
+        </licensematcherlist>
     </oatconfig>
 </configuration>
+
+
+
+
