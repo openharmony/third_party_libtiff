@@ -30,7 +30,7 @@ external_deps += [ "libtiff:libtiff" ]
 
 ## 使用libtiff库解码步骤
 
-1. 打开文件
+  1. 打开文件
 
   ```
   TIFF *TIFFOpen(const char *filename, const char *mode);
@@ -38,7 +38,7 @@ external_deps += [ "libtiff:libtiff" ]
   mode：打开模式（"r"表示读取）
   ```
 
-2. 读取图片的元数据
+  2. 读取图片的元数据
 
   ```
   int TIFFGetField(TIFF *tif, uint32_t tag, ...);
@@ -50,7 +50,7 @@ external_deps += [ "libtiff:libtiff" ]
   TIFFGetField(tif, TIFFTAG_IMAGEWIDTH, &imgWidth);
   ```
 
-3. 图片解码
+  3. 图片解码
 
   ```
   int TIFFReadRGBAImage(TIFF *tif, uint32_t width, uint32_t height, uint32_t *raster, int stopOnError);
@@ -70,7 +70,7 @@ external_deps += [ "libtiff:libtiff" ]
   }
   ```
 
-4. 关闭文件
+  4. 关闭文件
 
   ```
   void TIFFClose(TIFF *tif)；
