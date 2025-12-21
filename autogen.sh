@@ -18,14 +18,18 @@ automake --foreign --add-missing --copy || retval=$?
 autoconf || retval=$?
 # Get latest config.guess and config.sub from upstream master since
 # these are often out of date.
-for file in config.guess config.sub
-do
-    echo "$0: getting $file..."
-    wget -q --timeout=5 -O config/$file.tmp \
-      "https://git.savannah.gnu.org/cgit/config.git/plain/${file}" \
-      && mv -f config/$file.tmp config/$file \
-      && chmod a+x config/$file || retval=$?
-    rm -f config/$file.tmp
-done
+
+
+# 在 for file in config.guess config.sub 之前加一个判断
+if [ -f config/config.guess ] && [ -f config/config.sub ]; then
+    echo "$0: using existing config.guess and config.sub"
+else
+    for file in config.guess config.sub
+    do
+        echo "$0: getting $file..."
+        wget ... || retval=$?
+        ...
+    done
+fi
 
 exit $retval
