@@ -101,6 +101,7 @@
                 <filteritem type="filepath" name="contrib/tags/xtiffio.h" desc="上游文件，没有license"/>   
                 <filteritem type="filepath" name="contrib/tags/xtiffiop.h" desc="上游文件，没有license"/>   
                 <filteritem type="filepath" name="README.OpenSource " desc="readme.opensource"/>   
+                <filteritem type="filepath" name="config/" desc="上游文件，没有license"/>
             </filefilter>
                 <filefilter name="binaryFilter" desc="Binary files check filter">
                 <filteritem type="filepath" name="doc/.*" desc="Docs"/>
