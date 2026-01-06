@@ -25,8 +25,8 @@
 
 # libLerc
 set(LERC_SUPPORT FALSE)
-find_package(LERC)
-option(lerc "use libLerc (required for LERC compression)" ${LERC_FOUND})
-if (lerc AND LERC_FOUND AND ZIP_SUPPORT)
-    set(LERC_SUPPORT TRUE)
-endif()
+# find_package(LERC)
+# option(lerc "use libLerc (required for LERC compression)" ${LERC_FOUND})
+# if (lerc AND LERC_FOUND AND ZIP_SUPPORT)
+#     set(LERC_SUPPORT TRUE)
+# endif()
