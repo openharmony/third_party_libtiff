@@ -26,10 +26,10 @@
 # libwebp
 set(WEBP_SUPPORT FALSE)
 
-find_package(WebP)
+# find_package(WebP)
 
-option(webp "use libwebp (required for WEBP compression)" ${WebP_FOUND})
+# option(webp "use libwebp (required for WEBP compression)" ${WebP_FOUND})
 
-if (webp AND WebP_FOUND)
-    set(WEBP_SUPPORT TRUE)
-endif()
+# if (webp AND WebP_FOUND)
+#     set(WEBP_SUPPORT TRUE)
+# endif()
