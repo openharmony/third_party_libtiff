@@ -195,5 +195,4 @@ ohos_shared_library("libtiff") {
     output_extension = "so"
     install_images = [ "system" ]
     ldflags = [ "-Wl,-Map=libtiff.map" ]
-
 }
