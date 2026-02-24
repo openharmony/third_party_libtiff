@@ -2907,8 +2907,9 @@ int main(int argc, char *argv[])
     }
 
     /* If we did not use the read buffer as the crop buffer */
-    if (read_buff && read_buff != crop_buff)
+    if (read_buff && read_buff != crop_buff) {
         _TIFFfree(read_buff);
+    }
 
     if (crop_buff)
         _TIFFfree(crop_buff);
