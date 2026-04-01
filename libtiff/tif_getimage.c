@@ -750,14 +750,14 @@ static int gtTileContig(TIFFRGBAImage *img, uint32_t *raster, uint32_t w,
     }
     else
     {
-        if (tw > (INT_MAX + w))
-        {
+        int64_t toskew_tmp = (int64_t)tw - (int64_t)w;
+        if (toskew_tmp > INT32_MAX || toskew_tmp < INT32_MIN) {
             TIFFErrorExtR(tif, TIFFFileName(tif), "%s",
                           "unsupported tile size (too wide)");
             return (0);
         }
         y = 0;
-        toskew = -(int32_t)(tw - w);
+        toskew = -(int32_t)toskew_tmp;
     }
 
     if (tw == 0 || th == 0)
@@ -899,14 +899,15 @@ static int gtTileSeparate(TIFFRGBAImage *img, uint32_t *raster, uint32_t w,
     }
     else
     {
-        if (tw > (INT_MAX + w))
+        int64_t toskew_tmp = (int64_t)tw - (int64_t)w;
+        if (toskew_tmp > INT32_MAX || toskew_tmp < INT32_MIN)
         {
             TIFFErrorExtR(tif, TIFFFileName(tif), "%s",
                           "unsupported tile size (too wide)");
             return (0);
         }
         y = 0;
-        toskew = -(int32_t)(tw - w);
+        toskew = -(int32_t)toskew_tmp;
     }
 
     switch (img->photometric)
@@ -2091,7 +2092,13 @@ DECLAREContigPutFunc(putcontig8bitYCbCr44tile)
     uint32_t *cp1 = cp + w + toskew;
     uint32_t *cp2 = cp1 + w + toskew;
     uint32_t *cp3 = cp2 + w + toskew;
-    int32_t incr = 3 * w + 4 * toskew;
+    int64_t incr = (int64_t)3 * w + (int64_t)4 * toskew;
+    if (incr > INT32_MAX || incr < INT32_MIN)
+    {
+        TIFFErrorExtR(img->tif, TIFFFileName(img->tif), "%s",
+                    "Integer overflow in YCbCr tile processing");
+        return;
+    }
 
     (void)y;
     /* adjust fromskew */
@@ -2231,7 +2238,13 @@ DECLAREContigPutFunc(putcontig8bitYCbCr44tile)
 DECLAREContigPutFunc(putcontig8bitYCbCr42tile)
 {
     uint32_t *cp1 = cp + w + toskew;
-    int32_t incr = 2 * toskew + w;
+    int64_t incr = (int64_t)w + (int64_t)2 * toskew;
+    if (incr > INT32_MAX || incr < INT32_MIN)
+    {
+        TIFFErrorExtR(img->tif, TIFFFileName(img->tif), "%s",
+                    "Integer overflow in YCbCr tile processing");
+        return;
+    }
 
     (void)y;
     fromskew = (fromskew / 4) * (4 * 2 + 2);
@@ -2387,7 +2400,13 @@ DECLAREContigPutFunc(putcontig8bitYCbCr41tile)
 DECLAREContigPutFunc(putcontig8bitYCbCr22tile)
 {
     uint32_t *cp2;
-    int32_t incr = 2 * toskew + w;
+    int64_t incr = (int64_t)w + (int64_t)2 * toskew;
+    if (incr > INT32_MAX || incr < INT32_MIN)
+    {
+        TIFFErrorExtR(img->tif, TIFFFileName(img->tif), "%s",
+                    "Integer overflow in YCbCr tile processing");
+        return;
+    }
     (void)y;
     fromskew = (fromskew / 2) * (2 * 2 + 2);
     cp2 = cp + w + toskew;
@@ -2490,7 +2509,13 @@ DECLAREContigPutFunc(putcontig8bitYCbCr21tile)
 DECLAREContigPutFunc(putcontig8bitYCbCr12tile)
 {
     uint32_t *cp2;
-    int32_t incr = 2 * toskew + w;
+    int64_t incr = (int64_t)w + (int64_t)2 * toskew;
+    if (incr > INT32_MAX || incr < INT32_MIN)
+    {
+        TIFFErrorExtR(img->tif, TIFFFileName(img->tif), "%s",
+                    "Integer overflow in YCbCr tile processing");
+        return;
+    }
     (void)y;
     fromskew = (fromskew / 1) * (1 * 2 + 2);
     cp2 = cp + w + toskew;
