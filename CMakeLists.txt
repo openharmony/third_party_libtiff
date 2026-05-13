@@ -24,10 +24,7 @@
 # LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE
 # OF THIS SOFTWARE.
 
-cmake_minimum_required(VERSION 3.9.0)
-
-# Default policy is from 3.9.0
-cmake_policy(VERSION 3.9.0)
+cmake_minimum_required(VERSION 3.9...4.2)
 
 # Find CMake modules in cmake/
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
