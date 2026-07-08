@@ -162,11 +162,11 @@ ohos_shared_library("libtiff") {
     }
     if (enable_zip) {
         defines += [ "ZIP_SUPPORT" ]
-        external_deps += [ "zlib:libz" ]
+        external_deps += [ "zlib:shared_libz" ]
     }
     if (enable_pixarlog) {
         defines += [ "PIXARLOG_SUPPORT" ]
-        external_deps += [ "zlib:libz" ]
+        external_deps += [ "zlib:shared_libz" ]
     }
     if (enable_logluv) {
         defines += [ "LOGLUV_SUPPORT" ]
