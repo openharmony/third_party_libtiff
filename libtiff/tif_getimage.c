@@ -739,7 +739,7 @@ static int gtTileContig(TIFFRGBAImage *img, uint32_t *raster, uint32_t w,
     flip = setorientation(img);
     if (flip & FLIP_VERTICALLY)
     {
-        if ((tw + w) > INT_MAX)
+        if (((int64_t)tw + w) > INT_MAX)
         {
             TIFFErrorExtR(tif, TIFFFileName(tif), "%s",
                           "unsupported tile size (too wide)");
@@ -751,7 +751,8 @@ static int gtTileContig(TIFFRGBAImage *img, uint32_t *raster, uint32_t w,
     else
     {
         int64_t toskew_tmp = (int64_t)tw - (int64_t)w;
-        if (toskew_tmp > INT32_MAX || toskew_tmp < INT32_MIN) {
+        if (toskew_tmp > INT32_MAX || toskew_tmp < INT32_MIN)
+        {
             TIFFErrorExtR(tif, TIFFFileName(tif), "%s",
                           "unsupported tile size (too wide)");
             return (0);
@@ -771,7 +772,15 @@ static int gtTileContig(TIFFRGBAImage *img, uint32_t *raster, uint32_t w,
      */
     leftmost_fromskew = img->col_offset % tw;
     leftmost_tw = tw - leftmost_fromskew;
-    leftmost_toskew = toskew + leftmost_fromskew;
+    {
+        int64_t skew_i64 = (int64_t)toskew + leftmost_fromskew;
+        if (skew_i64 > INT_MAX || skew_i64 < INT_MIN)
+        {
+            TIFFErrorExtR(tif, TIFFFileName(tif), "%s", "Invalid skew");
+            return (0);
+        }
+        leftmost_toskew = (int32_t)skew_i64;
+    }
     for (row = 0; ret != 0 && row < h; row += nrow)
     {
         rowstoread = th - (row + img->row_offset) % th;
@@ -793,14 +802,32 @@ static int gtTileContig(TIFFRGBAImage *img, uint32_t *raster, uint32_t w,
             }
             pos = ((row + img->row_offset) % th) * TIFFTileRowSize(tif) +
                   ((tmsize_t)fromskew * img->samplesperpixel);
-            if (tocol + this_tw > w)
+            if ((uint64_t)tocol + this_tw > w)
             {
                 /*
                  * Rightmost tile is clipped on right side.
                  */
-                fromskew = tw - (w - tocol);
-                this_tw = tw - fromskew;
-                this_toskew = toskew + fromskew;
+                uint32_t fromskew_u32 = tw - (w - tocol);
+                if (fromskew_u32 > INT_MAX)
+                {
+                    TIFFErrorExtR(tif, TIFFFileName(tif), "%s",
+                                  "Invalid skew");
+                    ret = 0;
+                    break;
+                }
+                fromskew = (int32_t)fromskew_u32;
+                this_tw = w - tocol;
+                {
+                    int64_t skew_i64 = (int64_t)toskew + fromskew;
+                    if (skew_i64 > INT_MAX || skew_i64 < INT_MIN)
+                    {
+                        TIFFErrorExtR(tif, TIFFFileName(tif), "%s",
+                                      "Invalid skew");
+                        ret = 0;
+                        break;
+                    }
+                    this_toskew = (int32_t)skew_i64;
+                }
             }
             tmsize_t roffset = (tmsize_t)y * w + tocol;
             (*put)(img, raster + roffset, tocol, y, this_tw, nrow, fromskew,
@@ -888,7 +915,7 @@ static int gtTileSeparate(TIFFRGBAImage *img, uint32_t *raster, uint32_t w,
     flip = setorientation(img);
     if (flip & FLIP_VERTICALLY)
     {
-        if ((tw + w) > INT_MAX)
+        if (((int64_t)tw + w) > INT_MAX)
         {
             TIFFErrorExtR(tif, TIFFFileName(tif), "%s",
                           "unsupported tile size (too wide)");
@@ -934,7 +961,15 @@ static int gtTileSeparate(TIFFRGBAImage *img, uint32_t *raster, uint32_t w,
      */
     leftmost_fromskew = img->col_offset % tw;
     leftmost_tw = tw - leftmost_fromskew;
-    leftmost_toskew = toskew + leftmost_fromskew;
+    {
+        int64_t skew_i64 = (int64_t)toskew + leftmost_fromskew;
+        if (skew_i64 > INT_MAX || skew_i64 < INT_MIN)
+        {
+            TIFFErrorExtR(tif, TIFFFileName(tif), "%s", "Invalid skew");
+            return (0);
+        }
+        leftmost_toskew = (int32_t)skew_i64;
+    }
     for (row = 0; ret != 0 && row < h; row += nrow)
     {
         rowstoread = th - (row + img->row_offset) % th;
@@ -1003,14 +1038,32 @@ static int gtTileSeparate(TIFFRGBAImage *img, uint32_t *raster, uint32_t w,
 
             pos = ((row + img->row_offset) % th) * TIFFTileRowSize(tif) +
                   ((tmsize_t)fromskew * img->samplesperpixel);
-            if (tocol + this_tw > w)
+            if ((uint64_t)tocol + this_tw > w)
             {
                 /*
                  * Rightmost tile is clipped on right side.
                  */
-                fromskew = tw - (w - tocol);
-                this_tw = tw - fromskew;
-                this_toskew = toskew + fromskew;
+                uint32_t fromskew_u32 = tw - (w - tocol);
+                if (fromskew_u32 > INT_MAX)
+                {
+                    TIFFErrorExtR(tif, TIFFFileName(tif), "%s",
+                                  "Invalid skew");
+                    ret = 0;
+                    break;
+                }
+                fromskew = (int32_t)fromskew_u32;
+                this_tw = w - tocol;
+                {
+                    int64_t skew_i64 = (int64_t)toskew + fromskew;
+                    if (skew_i64 > INT_MAX || skew_i64 < INT_MIN)
+                    {
+                        TIFFErrorExtR(tif, TIFFFileName(tif), "%s",
+                                      "Invalid skew");
+                        ret = 0;
+                        break;
+                    }
+                    this_toskew = (int32_t)skew_i64;
+                }
             }
             tmsize_t roffset = (tmsize_t)y * w + tocol;
             (*put)(img, raster + roffset, tocol, y, this_tw, nrow, fromskew,
@@ -1090,7 +1143,7 @@ static int gtStripContig(TIFFRGBAImage *img, uint32_t *raster, uint32_t w,
     flip = setorientation(img);
     if (flip & FLIP_VERTICALLY)
     {
-        if (w > INT_MAX)
+        if (w > INT_MAX / 2)
         {
             TIFFErrorExtR(tif, TIFFFileName(tif), "Width overflow");
             return (0);
@@ -1101,7 +1154,7 @@ static int gtStripContig(TIFFRGBAImage *img, uint32_t *raster, uint32_t w,
     else
     {
         y = 0;
-        toskew = -(int32_t)(w - w);
+        toskew = 0;
     }
 
     TIFFGetFieldDefaulted(tif, TIFFTAG_ROWSPERSTRIP, &rowsperstrip);
@@ -1112,7 +1165,20 @@ static int gtStripContig(TIFFRGBAImage *img, uint32_t *raster, uint32_t w,
     }
 
     scanline = TIFFScanlineSize(tif);
-    fromskew = (w < imagewidth ? imagewidth - w : 0);
+    if (w < imagewidth)
+    {
+        uint32_t fromskew_u32 = imagewidth - w;
+        if (fromskew_u32 > INT_MAX)
+        {
+            TIFFErrorExtR(tif, TIFFFileName(tif), "%s", "Invalid skew");
+            return (0);
+        }
+        fromskew = (int32_t)fromskew_u32;
+    }
+    else
+    {
+        fromskew = 0;
+    }
     for (row = 0; row < h; row += nrow)
     {
         uint32_t temp;
@@ -1206,7 +1272,7 @@ static int gtStripSeparate(TIFFRGBAImage *img, uint32_t *raster, uint32_t w,
     flip = setorientation(img);
     if (flip & FLIP_VERTICALLY)
     {
-        if (w > INT_MAX)
+        if (w > INT_MAX / 2)
         {
             TIFFErrorExtR(tif, TIFFFileName(tif), "Width overflow");
             return (0);
@@ -1217,7 +1283,7 @@ static int gtStripSeparate(TIFFRGBAImage *img, uint32_t *raster, uint32_t w,
     else
     {
         y = 0;
-        toskew = -(int32_t)(w - w);
+        toskew = 0;
     }
 
     switch (img->photometric)
@@ -1241,7 +1307,20 @@ static int gtStripSeparate(TIFFRGBAImage *img, uint32_t *raster, uint32_t w,
     }
 
     scanline = TIFFScanlineSize(tif);
-    fromskew = (w < imagewidth ? imagewidth - w : 0);
+    if (w < imagewidth)
+    {
+        uint32_t fromskew_u32 = imagewidth - w;
+        if (fromskew_u32 > INT_MAX)
+        {
+            TIFFErrorExtR(tif, TIFFFileName(tif), "%s", "Invalid skew");
+            return (0);
+        }
+        fromskew = (int32_t)fromskew_u32;
+    }
+    else
+    {
+        fromskew = 0;
+    }
     for (row = 0; row < h; row += nrow)
     {
         uint32_t temp;
