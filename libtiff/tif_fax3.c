@@ -1439,6 +1439,18 @@ static void Fax3PrintDir(TIFF *tif, FILE *fd, long flags)
         (*sp->printdir)(tif, fd, flags);
 }
 
+static uint64_t Fax3GetMaxCompressionRatio(TIFF *tif)
+{
+    (void)tif;
+    /* 1024x1024: 36 */
+    /* 4096x4096: 100 */
+    /* 16383x16383: 163 */
+    /* 65536x65536: 200 */
+    /* 200000x200000: 208 */
+
+    return 250;
+}
+
 static int InitCCITTFax3(TIFF *tif)
 {
     static const char module[] = "InitCCITTFax3";
@@ -1503,6 +1515,7 @@ static int InitCCITTFax3(TIFF *tif)
     tif->tif_encodetile = Fax3Encode;
     tif->tif_close = Fax3Close;
     tif->tif_cleanup = Fax3Cleanup;
+    tif->tif_getmaxcompressionratio = Fax3GetMaxCompressionRatio;
 
     return (1);
 }
@@ -1658,6 +1671,12 @@ static int Fax4PostEncode(TIFF *tif)
     return (1);
 }
 
+static uint64_t Fax4GetMaxCompressionRatio(TIFF *tif)
+{
+    return isTiled(tif) ? tif->tif_dir.td_tilewidth
+                        : tif->tif_dir.td_imagewidth;
+}
+
 int TIFFInitCCITTFax4(TIFF *tif, int scheme)
 {
     (void)scheme;
@@ -1680,6 +1699,7 @@ int TIFFInitCCITTFax4(TIFF *tif, int scheme)
         tif->tif_encodestrip = Fax4Encode;
         tif->tif_encodetile = Fax4Encode;
         tif->tif_postencode = Fax4PostEncode;
+        tif->tif_getmaxcompressionratio = Fax4GetMaxCompressionRatio;
         /*
          * Suppress RTC at the end of each strip.
          */
@@ -1749,6 +1769,18 @@ static int Fax3DecodeRLE(TIFF *tif, uint8_t *buf, tmsize_t occ, uint16_t s)
     return (1);
 }
 
+static uint64_t Fax3RLEGetMaxCompressionRatio(TIFF *tif)
+{
+    (void)tif;
+    /* 1024x1024: 43 */
+    /* 4096x4096: 128 */
+    /* 16383x16383: 171 */
+    /* 65536x65536: 205 */
+    /* 200000x200000: 211 */
+
+    return 250;
+}
+
 int TIFFInitCCITTRLE(TIFF *tif, int scheme)
 {
     (void)scheme;
@@ -1757,6 +1789,7 @@ int TIFFInitCCITTRLE(TIFF *tif, int scheme)
         tif->tif_decoderow = Fax3DecodeRLE;
         tif->tif_decodestrip = Fax3DecodeRLE;
         tif->tif_decodetile = Fax3DecodeRLE;
+        tif->tif_getmaxcompressionratio = Fax3RLEGetMaxCompressionRatio;
         /*
          * Suppress RTC+EOLs when encoding and byte-align data.
          */
@@ -1775,6 +1808,7 @@ int TIFFInitCCITTRLEW(TIFF *tif, int scheme)
         tif->tif_decoderow = Fax3DecodeRLE;
         tif->tif_decodestrip = Fax3DecodeRLE;
         tif->tif_decodetile = Fax3DecodeRLE;
+        tif->tif_getmaxcompressionratio = Fax3RLEGetMaxCompressionRatio;
         /*
          * Suppress RTC+EOLs when encoding and word-align data.
          */

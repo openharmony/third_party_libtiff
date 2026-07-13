@@ -455,6 +455,17 @@ static const TIFFField lzmaFields[] = {
      "LZMA2 Compression Preset", NULL},
 };
 
+static uint64_t LZMAGetMaxCompressionRatio(TIFF *tif)
+{
+    (void)tif;
+    /* 1024x1024: 3800 */
+    /* 4096x4096: 6534 */
+    /* 16383x16383: 6846 */
+    /* 65536x65536: 6874 */
+
+    return 7000;
+}
+
 int TIFFInitLZMA(TIFF *tif, int scheme)
 {
     static const char module[] = "TIFFInitLZMA";
@@ -530,6 +541,7 @@ int TIFFInitLZMA(TIFF *tif, int scheme)
     tif->tif_encodestrip = LZMAEncode;
     tif->tif_encodetile = LZMAEncode;
     tif->tif_cleanup = LZMACleanup;
+    tif->tif_getmaxcompressionratio = LZMAGetMaxCompressionRatio;
     /*
      * Setup predictor setup.
      */
